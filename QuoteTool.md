@@ -28,6 +28,9 @@ To see method examples, check the [beauty'n'beast](https://github.com/lingtalfi/
 
 
 
+
+
+
 isQuotedString
 -----------
 2015-11-24

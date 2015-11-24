@@ -8,6 +8,11 @@ Utilities to manipulate quotes.
 
 
 
+Quoter utilities can be installed as a [planet](https://github.com/lingtalfi/Observer/blob/master/article/article.planetReference.eng.md).
+
+
+
+
 - [QuoteTool](https://github.com/lingtalfi/Quoter/blob/master/QuoteTool.md)
 
 
