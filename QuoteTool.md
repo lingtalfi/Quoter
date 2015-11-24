@@ -21,6 +21,9 @@ We use [quote escaping modes](https://github.com/lingtalfi/universe/blob/master/
 
 All methods here use [php multi-bytes functions](http://php.net/manual/en/ref.mbstring.php) (mb_)
  
+
+To see method examples, check the [beauty'n'beast](https://github.com/lingtalfi/Dreamer/blob/master/UnitTesting/BeautyNBeast/pattern.beautyNBeast.eng.md) tests in the btests directory.
+ 
  
 
 
@@ -37,4 +40,8 @@ bool        isQuotedString ( str:string, str:quoteType=null, bool:escapedRecursi
 If quoteType is null (the default), both types of quotes are tested.
 
 
+Example
 
+```php
+a(QuoteTool::isQuotedString('"hello"')); // true
+```
