@@ -27,6 +27,32 @@ To see method examples, check the [beauty'n'beast](https://github.com/lingtalfi/
  
 
 
+getCorrespondingEndQuotePos
+-------------------
+2015-11-25
+
+
+```php
+int|false    getCorrespondingEndQuotePos( str:string, int:pos=0, bool:escapeRecursiveMode=true )
+```
+
+
+
+Check that the char at the given position of the given string is a quote,
+then returns the position (from the beginning of the string) of the next unescaped quote of the same type.
+
+Returns false in case of failure, or the position of the next unescaped quote otherwise.
+
+Note: whether the quote at the given position is escaped or not is irrelevant.
+
+
+Example 
+
+```php
+a(QuoteTool::getCorrespondingEndQuotePos('abcdef'));  // false
+a(QuoteTool::getCorrespondingEndQuotePos('"abc"def'));  // 4
+a(QuoteTool::getCorrespondingEndQuotePos('"abc\"de"f'));  // 8
+```
 
 
 

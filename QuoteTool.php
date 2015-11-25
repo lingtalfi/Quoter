@@ -2,6 +2,7 @@
 
 namespace Quoter;
 
+use Escaper\EscapeTool;
 use WrappedString\WrappedStringTool;
 
 
@@ -59,26 +60,30 @@ class QuoteTool
 //        return false;
 //    }
 //
-//
-//    /**
-//     *
-//     * Tries to find a valid quotedString from the given position.
-//     * If it succeeds, it returns the position of the ending quote.
-//     * If it fails, it returns false.
-//     *
-//     * @return int|false
-//     *
-//     */
-//    public static function getCorrespondingEndQuotePos($string, $escapeRecursiveMode = true, $pos = 0)
-//    {
-//        $quote = mb_substr($string, $pos, 1);
-//        if (in_array($quote, ['"', "'"])) {
-//            if (false !== $pos = EscapeTool::getNextUnescapedSymbolPos($string, $quote, $pos + 1, $escapeRecursiveMode)) {
-//                return $pos;
-//            }
-//        }
-//        return false;
-//    }
+
+
+    /**
+     *
+     * Check that the char at the given position of the given string is a quote,
+     * then returns the position (from the beginning of the string) of the next unescaped quote of the same type.
+     * 
+     * Returns false in case of failure, or the position of the next unescaped quote otherwise.
+     * 
+     * Note: whether the quote at the given position is escaped or not is irrelevant.
+     *
+     * @return int|false
+     *
+     */
+    public static function getCorrespondingEndQuotePos($string, $pos = 0, $escapeRecursiveMode = true)
+    {
+        $quote = mb_substr($string, $pos, 1);
+        if (in_array($quote, self::$quoteTypes)) {
+            if (false !== $pos = EscapeTool::getNextUnescapedSymbolPos($string, $quote, $pos + 1, $escapeRecursiveMode)) {
+                return $pos;
+            }
+        }
+        return false;
+    }
 
     /**
      * @param null|string $quoteType , the quote type, null (by default) means both types of quote
