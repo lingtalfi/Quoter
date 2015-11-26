@@ -31,6 +31,10 @@ Dependencies
 History Log
 ------------------
     
+- 1.2.0 -- 2015-11-26
+
+    - add QuoteTool::getCorrespondingEndQuoteInfo
+    
 - 1.1.0 -- 2015-11-25
 
     - add QuoteTool::getCorrespondingEndQuotePos

@@ -33,42 +33,40 @@ class QuoteTool
 
     private static $quoteTypes = ['"', "'"];
 
-//    /**
-//     *
-//     * Tries to find a valid quotedString from the given position.
-//     *
-//     * If it succeeds, it returns an array containing:
-//     *              - 0: quotedString
-//     *              - 1: pos of the end quote
-//     *
-//     * If it fails, it returns false
-//     *
-//     *
-//     * @return array|false (0: quotedString, 1: position of lastQuote)
-//     *
-//     *
-//     */
-//    public static function getCorrespondingEndQuoteInfo($string, $escapeMode = 2, $pos = 0)
-//    {
-//        if (false !== $lastP = self::getCorrespondingEndQuotePos($string, $escapeMode, $pos)) {
-//            $quoted = mb_substr($string, $pos, $lastP - $pos + 1);
-//            return [
-//                $quoted,
-//                $lastP,
-//            ];
-//        }
-//        return false;
-//    }
-//
+    /**
+     *
+     * Check that the char at the given position of the given string is a quote,
+     * then returns an array containing:
+     *              - 0: quotedString
+     *              - 1: pos of the end quote
+     *
+     * If it fails, it returns false
+     *
+     *
+     * @return false|array (0: quotedString, 1: position of lastQuote)
+     *
+     *
+     */
+    public static function getCorrespondingEndQuoteInfo($string, $pos = 0, $escapeRecursiveMode = true)
+    {
+        if (false !== $lastP = self::getCorrespondingEndQuotePos($string, $pos, $escapeRecursiveMode)) {
+            $quoted = mb_substr($string, $pos, $lastP - $pos + 1);
+            return [
+                $quoted,
+                $lastP,
+            ];
+        }
+        return false;
+    }
 
 
     /**
      *
      * Check that the char at the given position of the given string is a quote,
      * then returns the position (from the beginning of the string) of the next unescaped quote of the same type.
-     * 
+     *
      * Returns false in case of failure, or the position of the next unescaped quote otherwise.
-     * 
+     *
      * Note: whether the quote at the given position is escaped or not is irrelevant.
      *
      * @return int|false

@@ -27,6 +27,41 @@ To see method examples, check the [beauty'n'beast](https://github.com/lingtalfi/
  
 
 
+getCorrespondingEndQuoteInfo
+-------------------
+2015-11-26
+
+
+```php
+false|array(str:quotedString, int:endQuotePos)    getCorrespondingEndQuoteInfo( str:string, int:pos=0, bool:escapeRecursiveMode=true )
+```
+
+
+
+Check that the char at the given position of the given string is a quote,
+then returns an array containing:
+
+- 0: quotedString
+- 1: pos of the end quote
+          
+  If it fails, it returns false
+     
+     
+Note: whether the quote at the given position is escaped or not is irrelevant.
+
+
+Example 
+
+```php
+a(QuoteTool::getCorrespondingEndQuoteInfo('abcdef'));  // false
+a(QuoteTool::getCorrespondingEndQuoteInfo('"abc"def'));  // ['"abc"def', 4]
+a(QuoteTool::getCorrespondingEndQuoteInfo('"abc\"de"f'));  // ['"abc\"de"', 8]
+```
+
+
+
+
+
 getCorrespondingEndQuotePos
 -------------------
 2015-11-25
