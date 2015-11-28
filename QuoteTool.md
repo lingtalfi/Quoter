@@ -109,3 +109,40 @@ Example
 ```php
 a(QuoteTool::isQuotedString('"hello"')); // true
 ```
+
+
+
+
+quote 
+-----------
+2015-11-28
+
+
+Quotes a quotable unquoted string.
+
+Returns false if the given string is unquotable.
+An unquotable string is only possible if escapeRecursiveMode is false and the last character
+of the string is the backslash (\).
+
+
+Returns false|string,
+          the quoted string, or false if the given string is unquotable,
+          in which case a warning is generated.
+     
+     
+```php
+false|string        quote ( str:unquotedString, str:quoteType=", bool:escapedRecursiveMode=true ) 
+```
+
+
+Example
+
+```php
+a(QuoteTool::quote('abc')); // "abc"
+```
+
+
+
+
+
+

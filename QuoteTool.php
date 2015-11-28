@@ -2,6 +2,7 @@
 
 namespace Quoter;
 
+use Bat\StringTool;
 use Escaper\EscapeTool;
 use WrappedString\WrappedStringTool;
 
@@ -111,37 +112,47 @@ class QuoteTool
     }
 
 
-//    public static function quote($unquotedString, $escapeMode = 2, $quoteType = '"')
-//    {
-//        if (2 === $escapeMode) {
-//            if ('\\' === substr($unquotedString, -1)) {
-//                $lastPos = strlen($unquotedString) - 1;
-//                if (false === EscapeTool::isPositionEscaped($unquotedString, $lastPos, $escapeMode)) {
-//                    $unquotedString .= '\\';
-//                }
-//            }
-//            $pos = 0;
-//            while (false !== $qPos = strpos($unquotedString, $quoteType, $pos)) {
-//                if ($quoteType === substr($unquotedString, $qPos, 1) && false === EscapeTool::isPositionEscaped($unquotedString, $qPos, $escapeMode)) {
-//                    $unquotedString = StringTool::insertAt($unquotedString, $qPos, '\\');
-//                    $pos = $qPos + 2;
-//                }
-//                else {
-//                    $pos = $qPos + 1;
-//                }
-//            }
-//            return $quoteType . $unquotedString . $quoteType;
-//        }
-//        elseif (1 === $escapeMode) {
-//            if ('\\' === substr($unquotedString, -1)) {
-//                throw new \RuntimeException("Invalid quotedString argument: using escapeMode=1, a string must not end with the backslash char");
-//            }
-//            return $quoteType . str_replace($quoteType, '\\' . $quoteType, $unquotedString) . $quoteType;
-//        }
-//        elseif (0 === $escapeMode) {
-//            return $quoteType . $unquotedString . $quoteType;
-//        }
-//    }
+    /**
+     * Quotes a quotable unquoted string.
+     *
+     * Returns false if the given string is unquotable.
+     * An unquotable string is only possible if escapeRecursiveMode is false and the last character
+     * of the string is the backslash (\).
+     *
+     *
+     * Returns false|string,
+     *              the quoted string, or false if the given string is unquotable,
+     *              in which case a warning is generated.
+     *
+     */
+    public static function quote($unquotedString, $quoteType = '"', $escapeRecursiveMode = true)
+    {
+
+        if (false === $escapeRecursiveMode && '\\' === substr($unquotedString, -1)) {
+            trigger_error("Unquotable string given. Using simple escape mode, a quotable string must not end with the backslash character", E_USER_WARNING);
+            return false;
+        }
+
+        $pos = 0;
+        while (false !== $qPos = mb_strpos($unquotedString, $quoteType, $pos)) {
+            if ($quoteType === mb_substr($unquotedString, $qPos, 1) && false === EscapeTool::isEscapedPos($unquotedString, $qPos, $escapeRecursiveMode)) {
+                $unquotedString = StringTool::replacePortion($unquotedString, $qPos, 0, '\\');
+                $pos = $qPos + 2;
+            }
+            else {
+                $pos = $qPos + 1;
+            }
+        }
+
+        // if in recursive escape mode, if the last char is backslash, we ensure that it is escaped.
+        if (true === $escapeRecursiveMode && '\\' === substr($unquotedString, -1)) {
+            $lastPos = mb_strlen($unquotedString) - 1;
+            if (false === EscapeTool::isEscapedPos($unquotedString, $lastPos, $escapeRecursiveMode)) {
+                $unquotedString .= '\\';
+            }
+        }
+        return $quoteType . $unquotedString . $quoteType;
+    }
 //
 //
 //    /**

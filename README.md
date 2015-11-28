@@ -26,10 +26,15 @@ Dependencies
 
 - [lingtalfi/WrappedString 1.3.0](https://github.com/lingtalfi/WrappedString)
 - [lingtalfi/Escaper 1.4.0](https://github.com/lingtalfi/Escaper)
+- [lingtalfi/Bat 1.15](https://github.com/lingtalfi/Bat)
 
 
 History Log
 ------------------
+    
+- 1.3.0 -- 2015-11-28
+
+    - add QuoteTool::quote
     
 - 1.2.0 -- 2015-11-26
 
