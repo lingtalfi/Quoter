@@ -122,7 +122,7 @@ Quotes a quotable unquoted string.
 
 Returns false if the given string is unquotable.
 An unquotable string is only possible if escapeRecursiveMode is false and the last character
-of the string is the backslash (\).
+of the string is the backslash (\\\).
 
 
 Returns false|string,
