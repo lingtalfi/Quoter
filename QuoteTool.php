@@ -85,6 +85,8 @@ class QuoteTool
     }
 
     /**
+     * Returns whether or not the given string is a valid quoted string.
+     * 
      * @param null|string $quoteType , the quote type, null (by default) means both types of quote
      * @return bool
      */
@@ -153,21 +155,25 @@ class QuoteTool
         }
         return $quoteType . $unquotedString . $quoteType;
     }
-//
-//
-//    /**
-//     * @return false|string, returns false if the given string is not a valid quotedString
-//     */
-//    public static function unquote($quotedString, $escapeMode = 2)
-//    {
-//        $ret = false;
-//        if (true === self::isQuotedString($quotedString)) {
-//            $inner = substr($quotedString, 1, -1);
-//            $quote = substr($quotedString, 0, 1);
-//            return EscapeTool::unescape($inner, $quote, $escapeMode);
-//        }
-//        return $ret;
-//    }
+
+
+    /**
+     * Unquotes the given valid quoted string and returns the result.
+     * If the given string is not a valid quoted string, it return false.
+     * 
+     * 
+     * @return false|string
+     */
+    public static function unquote($quotedString, $escapeRecursiveMode = true)
+    {
+        $ret = false;
+        if (true === self::isQuotedString($quotedString, null, $escapeRecursiveMode)) {
+            $inner = substr($quotedString, 1, -1);
+            $quote = substr($quotedString, 0, 1);
+            return EscapeTool::unescape($inner, [$quote], $escapeRecursiveMode);
+        }
+        return $ret;
+    }
 
 
 }

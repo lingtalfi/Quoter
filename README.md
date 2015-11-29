@@ -32,6 +32,10 @@ Dependencies
 History Log
 ------------------
     
+- 1.4.0 -- 2015-11-29
+
+    - add QuoteTool::unquote
+    
 - 1.3.0 -- 2015-11-28
 
     - add QuoteTool::quote

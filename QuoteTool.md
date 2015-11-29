@@ -96,6 +96,8 @@ isQuotedString
 -----------
 2015-11-24
 
+Returns whether or not the given string is a valid quoted string.
+
 
 ```php
 bool        isQuotedString ( str:string, str:quoteType=null, bool:escapedRecursiveMode=true ) 
@@ -140,6 +142,29 @@ Example
 ```php
 a(QuoteTool::quote('abc')); // "abc"
 ```
+
+
+
+
+unquote 
+-----------
+2015-11-29
+
+
+Unquotes the given valid quoted string and returns the result.
+If the given string is not a valid quoted string, it return false.
+ 
+ 
+```php
+false|string        unquote ( str:quotedString, bool:escapedRecursiveMode=true ) 
+```
+
+Example
+
+```php
+a(QuoteTool::unquote('"abc"')); // abc
+```
+
 
 
 
