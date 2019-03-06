@@ -1,10 +1,10 @@
 <?php
 
-namespace Quoter;
+namespace Ling\Quoter;
 
-use Bat\StringTool;
-use Escaper\EscapeTool;
-use WrappedString\WrappedStringTool;
+use Ling\Bat\StringTool;
+use Ling\Escaper\EscapeTool;
+use Ling\WrappedString\WrappedStringTool;
 
 
 /**
